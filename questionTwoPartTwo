@@ -1,0 +1,260 @@
+/***************************************************************************
+  * Author: Ekaterina Grabovskaya                    						*
+  * Purpose: This is a pseudocode for an algorithm that will 				*
+  			 read .csv files of three shipping companies, store 		 	*
+  			 information from them in arrays of objects. Then print 		*
+  			 the information stored in arrays of Objects out.				*
+  			 Then sort each array from the the largest total cargo capacity *
+  			 first to the smallest and print information out again.			*
+  * Date: 22/11/2020                                   						*
+  ***************************************************************************/
+  
+ START QuestionOne
+ 	MAIN: 
+ 		names := "Nelra", "Natsirt", "Divad"
+		filePathNelra := getUserInputPath <- names[0]
+		sizeColRowNelra := getRowCol <- filePathNelra
+		dataNelraCSV := readCSV <- filePathNelra, sizeColRowNelra
+		
+		filePathNatsir := getUserInputPath <- names[1]
+		sizeColRowNatsir := getRowCol <- filePathNatsir
+		dataNatsirCSV := readCSV <- filePathNatsir, sizeColRowNatsir 
+		
+		filePathDivad := getUserInputPath <- names[2]
+		sizeColRowDivad := getRowCol <- filePathNatsir
+		dataDivadCSV := readCSV <- filePathDivad, sizeColRowDivad 
+		toPrintDataArr <- dataNelraCSV
+		toPrintDataArr <- dataNatsirCSV
+		toPrintDataArr <- dataDivadCSV
+		arrayBubbleSort <- dataNelraCSV
+		arrayBubbleSort <- dataNatsirCSV
+		arrayBubbleSort <- dataDivadCSV
+		OUTPUT "\n"
+		toPrintDataArr <- dataNelraCSV
+		toPrintDataArr <- dataNatsirCSV
+		toPrintDataArr <- dataDivadCSV
+		totalCompanyCap <- dataNelraCSV, dataNatsirCSV, dataDivadCSV
+	END MAIN
+	
+	
+	
+	/****************************************************************************
+    * SUBMODULE: getUserInputPath			         							*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: names (String)										            *
+    * EXPORT: filePath (String)                  								*
+    * PURPOSE: getUserInputPath prompts the user to enter the path 
+    		   to the .csv file and stores it.             						*
+    *****************************************************************************/
+	
+		OUTPUT "Please, enter the path to the .csv file for " + names + " : "
+	    INPUT filePath (String)
+	
+	
+	
+	/****************************************************************************
+    * SUBMODULE: getRowCol			         									*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: filePath (String) 									            *
+    * EXPORT: size (Array of Integer)                													*
+    * PURPOSE: an array that reads through .csv file and stores info about 
+    		   amount of columns and rows in an array   
+      COMMENTS: Pseudocode style for read file inside TRY...CATCH was based  
+      			on pseudocode for read file from Lecture 7.			      		*
+    *****************************************************************************/
+	
+		FileInputStream fileStream := null
+		rowNum := 0
+		splitLine := null
+	    colNum := 0
+	    size (ARRAY OF Integer OF SIZE 2)
+	    TRY
+	        theFile = OPENFILE filePath  
+			lineNum := 0
+			READ line FROM theFile 
+			DO
+				READ line FROM theFile
+	            TRY
+	                splitLine := line.split <- ","
+	            END TRY
+	            CATCH (NullPointerException nullPointer) 
+	            END CATCH
+	            rowNum INC BY 1
+	            colNum := splitLine.length    
+	            size[0] := rowNum
+	            size[1] := colNum
+			END DO
+			WHILE NOT (theFile = EOF)
+		END TRY
+	    CATCH (IOException ex1)
+	        OUTPUT "Error in reading a file, exception is thrown.\nPlease, check the file path entered."
+	    END CATCH       
+	    
+
+		
+	/****************************************************************************
+    * SUBMODULE: readCSV			         									*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: filePath (String), sizeRowCol (Array of Integer)							            *
+    * EXPORT: shipObj (Array of Objects Ship)                													*
+    * PURPOSE: an array that reads through .csv file and stores info about 
+    		   amount of columns and rows in an array   
+      COMMENTS: Pseudocode style for read file inside TRY...CATCH was based  
+      			on pseudocode for read file from Lecture 7.			      		*
+    *****************************************************************************/
+	
+		shipObj (ARRY OF Ship SIZE OF sizeColRow[0])
+		FileInputStream fileStream := null
+		rowNum := 0
+		splitLine := null
+	    size (ARRAY OF Integer OF SIZE 2)
+	    TRY
+	        theFile = OPENFILE filePath  
+			lineNum := 0
+			READ line FROM theFile 
+			DO
+				READ line FROM theFile
+	            TRY
+	                splitLine := line.split <- ","
+	                CONSTRUCT cargo USING default CargoCapacity
+	                year := Integer.parseInt <- splitLine[3]
+	                widthCargo := Double.parseDouble <- splitLine[5]
+	                lengthCargo := Double.parseDouble <- splitLine[6]
+	                heightCargo := Double.parseDouble <- splitLine[7]
+	                enclosed := Boolean.parseBoolean <- splitLine[8]
+	                cargo.setWidth <- widthCargo
+	                cargo.setLength <- lengthCargo
+	                cargo.setHeight <- heightCargo
+	                cargo.setEnclosed <- enclosed
+	                CONSTRUCT nullPointerSolution USING splitLine[0], splitLine[1], splitLine[2], year, splitLine[4], cargo
+	                shipObj[rowNum] := nullPointerSolution
+	                rowNum INC BY 1  
+	            END TRY
+	            CATCH (NullPointerException n) 
+	            	OUTPUT " "
+	            END CATCH
+	        END DO
+			WHILE NOT (theFile = EOF)
+			CLOSE file
+		END TRY
+	    CATCH (IOException e)
+	    	IF (fileStream IS NOT null) THEN
+	    		TRY
+	    			CLOSE file
+	    		END TRY	
+	    		CATCH (IOException ex2)
+	    			OUTPUT "File Stream is not closed, I/O Exception is thrown."
+	    		END CATCH
+	    	END IF
+	     END CATCH 
+
+
+
+	/****************************************************************************
+    * SUBMODULE: toPrintDataArr			         								*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: dataCSV (Array of Objects Ship)							        *
+    * EXPORT: none                												*
+    * PURPOSE: his method prints out information from .csv file, 
+        	   saved as an array of objects   						      		*
+    *****************************************************************************/
+    
+    	arrHeading := "Name", "Registration ID", "Country of Registration", "Year of Manufacture", "Shipping Company", "Width", "Length", "Height", "Enclosed", "Total Capacity"
+		
+		OUTPUT "       | " + arrHeading[0] + "   		 " + arrHeading[1] + "	  " + arrHeading[2] + "  	" + arrHeading[3] + "	      " + arrHeading[4] + "		         " + arrHeading[5] 
+						   + "			       " + arrHeading[6] +  "			" + arrHeading[7] + "			" + arrHeading[8] + "		" + arrHeading[9]
+		
+		FOR ii := 0 TO dataCSV.length (exclusive) INC BY 1
+			distanceName := determineDistance <- dataCSV[ii].getName <- none
+			distanceCountry := determineDistance <- dataCSV[ii].getCountryOfRegistr <- none
+			count := ii + 1
+			OUTPUT "Ship " + count + " | " +  dataCSV[ii].getName <- none + distanceName + dataCSV[ii].getRegistrID <- none + "			" + dataCSV[ii].getCountryOfRegistr <- none + distanceCountry +
+								dataCSV[ii].getYearOfManufacturing <- none + " 			     " + dataCSV[ii].getShippingCompany <- none + "			  " + dataCSV[ii].getCargoCap <- getWidth <- none + "			     "
+								+ dataCSV[ii].getCargoCap <- getLength <- none + "			" + dataCSV[ii].getCargoCap <- getHeight <- none + "			" + dataCSV[ii].getCargoCap <- getEnclosed <- none + "			 "
+								+ dataCSV[ii].getCargoCap <- getCubicCapacity <- none
+		END FOR
+		
+		
+	
+	/****************************************************************************************
+    * SUBMODULE: determineDistance			         										*
+    * DATE: 22/11/2020                 														*
+    * IMPORT: string (Spring)			        											*
+    * EXPORT: space (String)                												*
+    * PURPOSE: determineDistance determines how big the space is required based on 			*
+    *		   length of a String. The main purpose of this method is to make output 		*
+    *		   look more aligned  						      								*
+    ****************************************************************************************/
+		
+		IF (string.length IS 7) THEN
+			space := "	 	   "
+		ELSE IF (string.length < 5) THEN
+			space := "		  	   "
+		ELSE IF (string.length > 6) THEN 
+			space = "	 	    "
+		ELSE
+			space = "	  		   "
+		END IF
+	
+		
+		
+	/****************************************************************************************
+    * SUBMODULE: arrayBubbleSort			         										*
+    * DATE: 22/11/2020                 														*
+    * IMPORT: dataCSV (Array of Objects Ship)			        							*										
+    * EXPORT: dataCSV (Array of Objects Ship)              									*
+    * PURPOSE: arrayBubbleSort will sort array of objects Ship based on cargo capacity		*
+    *		   from largest cargo capacity to smallest cargo capacity						* 						      								
+    ****************************************************************************************/	
+		
+		pass := 0
+		sorted := false
+		CONSTRUCT tempHolder USING default Ship
+		DO
+			FOR ll = 0 TO ((dataCSV.length - 1 - pass) - 1) INC BY 1
+				IF (dataCSV[ll].cargoCap.getCubicCapacity <- none < dataCSV[ll+1].cargoCap.getCubicCapacity <- none) THEN
+					tempHolder := dataCSV[ll]
+					dataCSV[ll] := dataCSV[ll+1]
+					dataCSV[ll+1] := tempHolder
+				END IF
+			END FOR
+			pass := pass + 1
+			IF (pass > dataCSV.length - 1) THEN
+				sorted := true
+			END IF
+		END DO
+		WHILE (sorted IS NOT true)
+			
+			
+	
+	/****************************************************************************************
+    * SUBMODULE: totalCompanyCap			         										*
+    * DATE: 22/11/2020                 														*
+    * IMPORT: dataNelraCSV (Array of Objects Ship), dataNatsirCSV (Array of Objects Ship),  *
+    *		  dataDivadCSV	(Array of Objects Ship)			        						*
+    * EXPORT: none                															*
+    * PURPOSE: This method calculates and prints out the total cargo capacity 				*
+    *		   for each company  						      								*
+    ****************************************************************************************/
+		
+		totalCapNelra := 0, totalCapNatris := 0, totalCapDivad := 0
+		CONSTRUCT newForm USING default DecimalFormat <- "#.##"
+		FOR xx := 0 TO dataNelraCSV.length INC BY 1
+			totalCapNelra := dataNelraCSV[xx].getCargoCap <- getCubicCapacity <- none + totalCapNelra
+		END FOR
+		FOR zz := 0 TO dataNatsirCSV.length INC BY 1
+			totalCapNatris := dataNatsirCSV[zz].getCargoCap <- getCubicCapacity <- none + totalCapNatris
+		FOR cc := 0 TO dataNelraCSV.length INC BY 1
+			totalCapDivad := dataDivadCSV[zz].getCargoCap <- getCubicCapacity <- none + dataDivadCSV[zz].getCargoCap <- getCubicCapacity <- none + totalCapDivad
+		END FOR
+		
+		OUTPUT "\nTotal capacity of Nelra company is: " + newForm.format(totalCapNelra) + " cubic metres.\n"
+		OUTPUT "Total capacity of Natris company is: " + newForm.format(totalCapNatris) + " cubic metres.\n"
+		OUTPUT "Total capacity of Divad company is: " + newForm.format(totalCapDivad) + " cubic metres.\n"
+		
+			
+	
+	
+	
+	
+	

@@ -1,0 +1,261 @@
+ /***************************************************************************
+  * Author: Ekaterina Grabovskaya                    						*
+  * Purpose: this is a pseudocode for Class Ship, Question 2 Part 1			*
+  * Date: 22/11/2020                                   						*
+  ***************************************************************************/
+  
+ START Ship
+ 	CLASS FIELDS:
+	 	name (String)
+		registrID (String)
+		countryOfRegistr (String)
+		yearOfManufacture (Integer)
+		shippingCompany (String)
+		CONSTRUCT cargoCap USING default
+	CLASS FIELDS END
+		
+		
+		
+	/****************************************************************************
+    * SUBMODULE: DEFAULT CONSTRUCTOR           								*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none													            *
+    * EXPORT: none					                  							*
+    * ASSERTION:  Creates an object with the default values for class Ship		*
+    *****************************************************************************/
+
+		name := "Britannic"
+		registrID := "862876"
+		countryOfRegistr := "Australia"
+		yearOfManufacture := 2008
+		shippingCompany := "Asmo Shipping"
+		CONSTRUCT cargoCap USING 15.0, 10.0, 10.0, true
+ 	
+ 	
+ 	
+ 	/****************************************************************************
+    * SUBMODULE: ALTERNATE CONSTRUCTOR           								*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: pName (String), pRegistrID (String), pCountryOfRegistr (String),  *
+    *         pYearOfManufacture (Integer), pShippingCompany (String), 			*
+    *		  pCargoCap	(CargoCapacity)											*
+    * EXPORT: none					                  							*
+    * ASSERTION:  Creates object with imported values							*
+    *****************************************************************************/
+
+		name := pName
+		registrID := pRegistrID
+		countryOfRegistr := pCountryOfRegistr
+		yearOfManufacture := pYearOfManufacture
+		shippingCompany := pShippingCompany
+		cargoCap := pCargoCap
+		
+		
+		
+	/****************************************************************************
+    * SUBMODULE: COPY CONSTRUCTOR      		     								*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: pShip (Ship)														*
+    * EXPORT: none					                  							*
+    * ASSERTION:  Created a Copy of the Imported object							*
+    *****************************************************************************/
+		
+		name := pShip.getName()
+		registrID := pShip.getRegistrID()
+		countryOfRegistr := pShip.getCountryOfRegistr()
+		yearOfManufacture := pShip.getYearOfManufacturing()
+		shippingCompany := pShip.getShippingCompany()
+		cargoCap := pShip.getCargoCap()
+		
+		
+		
+	/****************************************************************************
+    * ACCESSOR: getName					           								*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: name (String)					          							*
+    * ASSERTION:  Returns the name												*
+    *****************************************************************************/
+		
+		EXPORT COPY OF firstName
+		Alternate ALGORITHM:
+			RETURN COPY OF firstName
+			
+	
+	
+	/****************************************************************************
+    * ACCESSOR: getRegistrID					           						*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: registrID (String)					          					*
+    * ASSERTION:  Returns the registration ID									*
+    *****************************************************************************/
+		
+		EXPORT COPY OF registrID
+		Alternate ALGORITHM:
+			RETURN COPY OF registrID
+			
+			
+			
+	/****************************************************************************
+    * ACCESSOR: getCountryOfRegistr		           								*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: countryOfRegistr (String)					          				*
+    * ASSERTION:  Returns the country of registration							*
+    *****************************************************************************/
+		
+		EXPORT COPY OF countryOfRegistr
+		Alternate ALGORITHM:
+			RETURN COPY OF countryOfRegistr
+	
+	
+	
+	/****************************************************************************
+    * ACCESSOR: getYearOfManufacturing					           				*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: yearOfManufacture (Integer)					          			*
+    * ASSERTION:  Returns the year of manufacturing								*
+    *****************************************************************************/
+		
+		EXPORT COPY OF yearOfManufacture
+		Alternate ALGORITHM:
+			RETURN COPY OF yearOfManufacture
+	
+	
+	
+	/****************************************************************************
+    * ACCESSOR: getShippingCompany					           					*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: shippingCompany (String)					          				*
+    * ASSERTION:  Returns the name of a shipping company						*
+    *****************************************************************************/
+		
+		EXPORT COPY OF shippingCompany
+		Alternate ALGORITHM:
+			RETURN COPY OF shippingCompany
+		
+	
+	
+	/****************************************************************************
+    * ACCESSOR: getCargoCap					           							*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: cargoCap (CargoCapacity)					          				*
+    * ASSERTION:  Returns the values of a Class CargoCapacity					*
+    *****************************************************************************/
+		
+		EXPORT COPY OF cargoCap
+		Alternate ALGORITHM:
+			RETURN COPY OF cargoCap
+			
+			
+	
+	/****************************************************************************		
+	* MUTATOR: setName															*
+	* DATE: 22/11/2020  														*
+	* IMPORT: pName (String)													*
+	* EXPORT: none
+	* ASSERTION: State of name is updated to pName value
+	****************************************************************************/
+		firstName := pFirstName
+		
+		
+		
+	/****************************************************************************		
+	* MUTATOR: setRegistrID														*
+	* DATE: 22/11/2020  														*
+	* IMPORT: pRegistrID (String)												*
+	* EXPORT: none
+	* ASSERTION: State of registrID is updated to pRegistrID value
+	****************************************************************************/
+		registrID := pRegistrID
+	
+	
+	
+	/****************************************************************************		
+	* MUTATOR: setCountryOfRegistr												*
+	* DATE: 22/11/2020  														*
+	* IMPORT: pCountryOfRegistr (String)										*
+	* EXPORT: none
+	* ASSERTION: State of countryOfRegistr is updated to pCountryOfRegistr value
+	****************************************************************************/
+		countryOfRegistr := pCountryOfRegistr
+		
+		
+		
+	/****************************************************************************		
+	* MUTATOR: setYearOfManufacturing											*
+	* DATE: 22/11/2020  														*
+	* IMPORT: pYearOfManufacture (Integer)										*
+	* EXPORT: none
+	* ASSERTION: State of yearOfManufacture is updated to pYearOfManufacture value
+	****************************************************************************/
+		yearOfManufacture := pYearOfManufacture
+	
+	
+	
+	/****************************************************************************		
+	* MUTATOR: setShippingCompany												*
+	* DATE: 22/11/2020  														*
+	* IMPORT: pShippingCompany (String)											*
+	* EXPORT: none
+	* ASSERTION: State of shippingCompany is updated to pShippingCompany value
+	****************************************************************************/
+		shippingCompany := pShippingCompany
+		
+		
+		
+	/****************************************************************************		
+	* MUTATOR: setCargoCap														*
+	* DATE: 22/11/2020  														*
+	* IMPORT: pCargoCapacity (CargoCapacity)									*
+	* EXPORT: none
+	* ASSERTION: State of cargoCap is updated to pCargoCapacity value
+	****************************************************************************/
+		cargoCap := pCargoCapacity
+	
+
+
+	/****************************************************************************		
+	* ACCESSOR: equals															*
+	* IMPORT: inObject (Object)													*
+	* EXPORT: isEqual (Boolean)													*
+	* ASSERTION: Returns true if the two objects' name and registration ID 
+				 are equivalent													*
+	****************************************************************************/
+	
+		isEqual = FALSE
+		IF inObject IS A Ship THEN
+			TRANSFORM inObject TO Ship NAMED inShip
+				IF name EQUALS inShip.getName() THEN
+					IF registrID EQUALS inShip.getRegistrID() THEN
+						isEqual = TRUE
+		END IF
+		
+		
+		
+	/****************************************************************************		
+	* ACCESSOR: toString														*
+	* IMPORT: name (String), registrID (String), countryOfRegistr (String),     *
+    *         yearOfManufacture (Integer), shippingCompany (String), 			*
+    *		  cargoCap (CargoCapacity)											*
+	* EXPORT: finalString (String)												*
+	* ASSERTION: Returns a String representation of the object				    *
+	****************************************************************************/
+		OUTPUT "\nThe Ship's characteristics: \r\n" + "Name: " + name +"\r\nRegistration Identification: " + registrID + "\r\nCountry of registration: " + 
+					   countryOfRegistr + "\r\nYear of manufacturing: " + yearOfManufacture + "\r\nShiping company: " + shippingCompany + "\r\n" + cargoCap.toString()
+
+		
+		
+		
+		
+		
+		
+		
+		
+ 	 
+ 		
+ 	

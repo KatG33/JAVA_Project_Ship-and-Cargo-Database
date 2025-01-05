@@ -1,0 +1,208 @@
+ /***************************************************************************
+  * Author: Ekaterina Grabovskaya                    						*
+  * Purpose: this is a pseudocode for Class CargoCapacity, Question2 Part 1	*		
+  * Date: 22/11/2020                                   						*
+  ***************************************************************************/
+  
+ START Ship
+ 	CLASS FIELDS:
+		width (double)
+		length (double)
+		height (double)
+		enclosed (boolean)
+	CLASS FIELDS END
+		
+		
+		
+	/****************************************************************************
+    * SUBMODULE: DEFAULT CONSTRUCTOR           									*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none													            *
+    * EXPORT: none					                  							*
+    * ASSERTION:  Creates an object with the default values for class CargoCapacity
+    *****************************************************************************/
+
+		width := 5.0
+		length := 6.0
+		height := 10.0
+		enclosed := false
+ 	
+ 	
+ 	
+ 	/****************************************************************************
+    * SUBMODULE: ALTERNATE CONSTRUCTOR           								*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: pWidth (double), pLength (double), pHeight (double), 				*
+    *		  pEnclosed (boolean)												*
+    * EXPORT: none					                  							*
+    * ASSERTION:  Creates object with imported values							*
+    *****************************************************************************/
+
+		width := pWidth
+		length := pLength
+		height := pHeight
+		enclosed := pEnclosed
+		
+		
+		
+	/****************************************************************************
+    * SUBMODULE: COPY CONSTRUCTOR           									*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: pCargoCapacity (CargoCapacity)									*
+    * EXPORT: none				                  								*
+    * ASSERTION:  Created a Copy of the imported object							*
+    *****************************************************************************/
+		
+		width := pCargoCapacity.getWidth()
+		length := pCargoCapacity.getLength()
+		height := pCargoCapacity.getHeight()
+		enclosed := pCargoCapacity.getEnclosed()
+		
+		
+		
+	/****************************************************************************
+    * ACCESSOR: getWidth					           								*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: width (double)					          							*
+    * ASSERTION:  Returns the width												*
+    *****************************************************************************/
+		
+		EXPORT COPY OF width
+		Alternate ALGORITHM:
+			RETURN COPY OF width
+			
+	
+	
+	/****************************************************************************
+    * ACCESSOR: getLength					        	   						*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: length (double)						          					*
+    * ASSERTION:  Returns the length											*
+    *****************************************************************************/
+		
+		EXPORT COPY OF length
+		Alternate ALGORITHM:
+			RETURN COPY OF length
+			
+			
+			
+	/****************************************************************************
+    * ACCESSOR: getHeight		           										*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: height (double)					    		      				*
+    * ASSERTION:  Returns the country of height									*
+    *****************************************************************************/
+		
+		EXPORT COPY OF height
+		Alternate ALGORITHM:
+			RETURN COPY OF height
+	
+	
+	
+	/****************************************************************************
+    * ACCESSOR: getEnclosed					           							*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: enclosed (boolean)					          					*
+    * ASSERTION:  Returns the enclosed								*
+    *****************************************************************************/
+		
+		EXPORT COPY OF enclosed
+		Alternate ALGORITHM:
+			RETURN COPY OF enclosed
+	
+	
+	
+	/****************************************************************************
+    * ACCESSOR: getCubicCapacity					           					*
+    * DATE: 22/11/2020                       									*
+    * IMPORT: none																*
+    * EXPORT: cubicCapacity (double)					          				*
+    * ASSERTION:  Returns the name of a cubicCapacity							*
+    *****************************************************************************/
+		
+		EXPORT COPY OF cubicCapacity
+		Alternate ALGORITHM:
+			RETURN COPY OF cubicCapacity
+			
+			
+	
+	/****************************************************************************		
+	* MUTATOR: setWidth															*
+	* DATE: 22/11/2020  														*
+	* IMPORT: pWidth (double)													*
+	* EXPORT: none
+	* ASSERTION: State of name is updated to pName value
+	****************************************************************************/
+		width := pWidth
+		
+		
+		
+	/****************************************************************************		
+	* MUTATOR: setHeight														*
+	* DATE: 22/11/2020  														*
+	* IMPORT: pHeight (double)													*
+	* EXPORT: none
+	* ASSERTION: State of height is updated to pHeight value
+	****************************************************************************/
+		height := pHeight
+	
+	
+	
+	/****************************************************************************		
+	* MUTATOR: setEnclosed														*
+	* DATE: 22/11/2020  														*
+	* IMPORT: pEnclosed (boolean)												*
+	* EXPORT: none
+	* ASSERTION: State of enclosed is updated to pEnclosed value
+	****************************************************************************/
+		enclosed := pEnclosed
+	
+
+
+	/****************************************************************************		
+	* ACCESSOR: equals															*
+	* IMPORT: inObject (Object)													*
+	* EXPORT: isEqual (Boolean)													*
+	* ASSERTION: Returns true if the two objects' cubic capacities' 
+				 difference is smaller than 0.02 cubic meters					*
+	****************************************************************************/
+	
+		isEqual := FALSE
+		IF inObject IS A CargoCapacity THEN
+			TRANSFORM inObject TO CargoCapacity NAMED inCargo
+				IF getCubicCapacity() - inCargo.getCubicCapacity() IS LESS OR EQUALS 0.025 THEN
+					isEqual := TRUE
+		END IF
+		
+		
+		
+	/****************************************************************************		
+	* ACCESSOR: toString														*
+	* IMPORT: none																*
+	* EXPORT: finalString (String)												*
+	* ASSERTION: Returns a String representation of the object				    *
+	****************************************************************************/
+		
+		cubicCapacity := getCubicCapacity()
+		IF (enclosed IS true) 
+			enclosedString := "\r\nThe cargo is enclosed."
+		ELSE 
+			enclosedString := "\r\nThe cargo is not enclosed."
+		END IF
+		
+		OUTPUT "\r\nThe cargo capacity is: \r\n" + "Width: " + width +"\r\nLength: " + length + "\r\nHeight: " + height + "\r\nCubic capacity: " + cubicCapacity + enclosedString
+		
+	END SHIP
+		
+		
+		
+		
+		
+		
+		
+		
+		
